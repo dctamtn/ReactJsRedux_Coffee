@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My cafe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="js/fallbackbootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css" />
+
+    <script async src="js/validatesession.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script defer src="js/lib/jquery.min.js"><\/script>');
+    </script>
+
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        if ($.fn.modal === 'undefined') {
+            document.write('<script defer src="js/lib/bootstrap.min.js"><\/script>');
+        }
+    </script>
+
+    <script defer src="js/simplebar.js"></script>
+</head>
+
+<body>
+
+    <header class="container-fluid" id="header">
+        <div class="container">
+            <a id="bar" data-toggle="modal" data-target="#side-menu" title="Menu" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
+            <h4 class="page-header">My cafe</h4>
+            <a title="Home" class="pull-right" href="./index.html"><i id="icon" class="fa fa-coffee"></i></a>
+        </div>
+    </header>
+
+    <section id="side-menu" class="modal fade-left modal-menu" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" style="font-weight: 700">Danh Mục</h6>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close" style="color: red"></i></button>
+                </div>
+                <div class="list-group side-group">
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <nav class="container-fluid sticky-top" id="menu1">
+        <section class="container" id="horizon-menu1">
+            <div class="row" id="category-container">
+                <div class="scrollmenu col" data-simplebar>
+
+                </div>
+                <i id="btn-search" class="fa fa-search"></i>
+                <input v-model="keyword" type="search" name="search" id="search" placeholder="&#xf002 Nhập tên đồ uống" />
+                <i id="search-close" class="fa fa-close"></i>
+            </div>
+
+        </section>
+    </nav>
+    <div class="container-fluid" id="foodlist">
+        <div class="container">
+            <div class="row" id="itemlist">
+
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-light bg-light" id="shoppingBar">
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li class="nav-item" id="btnCart" title="Giỏ hàng">
+                    <a href="javascript:void(0);" class="nav-link"><i class="fa fa-shopping-cart"></i>Giỏ hàng<span id="shopBadge" class="badge badge-primary">24</span></a>
+                </li>
+                <li class="nav-item" id="btnBill" title="Hóa đơn">
+                    <a href="javascript:void(0);" class="nav-link"><i class="fa fa-list-alt"></i>Hóa đơn<span id="billBadge" class="badge badge-primary">0</span></a>
+                </li>
+                <li class="nav-item" id="btnCall" title="Gọi phục vụ">
+                    <a href="javascript:void(0);" class="nav-link"><i class="fa fa-bell"></i>Gọi NV<span id="callBadge" class="badge badge-primary">0</span></a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="modal" id="mdDetail">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header no-border">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="card">
+                        <img class="card-img-top" id="mdImg" src="" alt="">
+                        <div class="card-body">
+                            <h4 class="card-title" id="item-name"></h4>
+                            <p class="card-text" id="item-desc"></p>
+                            <p class="card-text price-color" id="item-price"></p>
+                            <form id="frmAddCart" class="form-inline" method="POST">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text substract">-</span>
+                                            </div>
+                                            <input type="number" inputmode="numeric" class="form-control quantity" id="quantity" min="1" value="1" style="max-width: 50px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text plus">+</span>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <button id="btnAddCart" type="submit" class="btn btn-info" data-id="" data-price=""><i class="fa fa-cart-plus"></i>Thêm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="mdCart">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title price-color"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="table-responsive-sm">
+                        <table id="tbCart" class="table">
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td scope="row"><strong>Tổng tiền</strong></td>
+                                    <td id="sumCart" class="price-color" colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="container">
+                        <button id="btnCheckout" class="btn btn-primary"> <i class="fa fa-check"></i> Đặt món</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast" id="myToast" data-delay="1000" role="alert" style="position: absolute;left: 0; z-index: 100;">
+        <div class="toast-header">
+            <strong class="mr-auto"><i class="fa fa-shopping-cart"></i>Giỏ hàng</strong>
+            <small>Hiện tại</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="toast-body">
+            <div>Bạn vừa thêm 1 sản phẩm vào giỏ hàng.</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
